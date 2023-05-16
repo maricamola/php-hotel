@@ -1,11 +1,9 @@
 <?php
 //Partiamo da questo array di hotel. https://www.codepile.net/pile/OEWY7Q1G
 // Stampare tutti i nostri hotel con tutti i dati disponibili.
-// Iniziate in modo graduale.
 // Prima stampate in pagina i dati, senza preoccuparvi dello stile. (push)
 // Dopo aggiungete Bootstrap e mostrate le informazioni con una tabella. (altro push)
-// Bonus:
-// Aggiungere un form ad inizio pagina che tramite una richiesta POST permetta di filtrare gli hotel che hanno un parcheggio.
+// Bonus: aggiungere un form ad inizio pagina che tramite una richiesta POST permetta di filtrare gli hotel che hanno un parcheggio.
 
 
 $hotels = [
@@ -47,9 +45,8 @@ $hotels = [
   ],
 
 ];
-var_dump($hotels);
-var_dump($hotels[0]['name'], $hotels[0]['description'], $hotels[0]['parking'], $hotels[0]['vote'], $hotels[0]['distance_to_center']);
-
+// var_dump($hotels);
+// var_dump($hotels[0]['name'], $hotels[0]['description'], $hotels[0]['parking'], $hotels[0]['vote'], $hotels[0]['distance_to_center']);
 
 ?>
 
@@ -67,6 +64,32 @@ var_dump($hotels[0]['name'], $hotels[0]['description'], $hotels[0]['parking'], $
 </head>
 
 <body>
+
+  <div class="container mt-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Parking</th>
+          <th scope="col">Vote</th>
+          <th scope="col">Distance to center</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php // prima prendo l'array($hotels) poi l'elemento che viene ciclato($hotel)
+        foreach ($hotels as $hotel) { ?>
+        <tr>
+          <td><?php echo $hotel['name']; ?></td>
+          <td><?php echo $hotel['description']; ?></td>
+          <td><?php echo $hotel['parking'] ? 'Yes' : 'No'; ?></td>
+          <td><?php echo $hotel['vote']; ?></td>
+          <td><?php echo $hotel['distance_to_center']; ?> km</td>
+        </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+  </div>
 
 </body>
 
