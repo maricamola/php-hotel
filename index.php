@@ -43,10 +43,21 @@ $hotels = [
     'vote' => 2,
     'distance_to_center' => 50
   ],
-
 ];
 // var_dump($hotels);
 // var_dump($hotels[0]['name'], $hotels[0]['description'], $hotels[0]['parking'], $hotels[0]['vote'], $hotels[0]['distance_to_center']);
+
+//Controlliamo se l'utente ha compilato il form
+if (isset($_POST['search'])) {
+  $search = strtolower(trim($_POST['search'])); // puliamo la stringa di ricerca (strtolower per convertire in minuscolo)
+
+  if ($search === 'parking') {
+    // se l'utente cerca "parking", filtriamo l'array di hotel per quelli che hanno il campo "parking" a true 
+    $hotels = array_filter($hotels, function ($hotel) {
+      return $hotel['parking'];
+    });
+  }
+}
 
 ?>
 
@@ -66,6 +77,19 @@ $hotels = [
 <body>
 
   <div class="container mt-4">
+    <span>
+      <h2 class="text-center m-4">Choose a hotel based on your needs!</h2>
+    </span>
+
+    <div>
+      <form method="post"> <label for="search" class="form-label">Type 'parking' for hotels with parking</label>
+        <div class="input-group mb-3"> <input type="text" class="form-control" id="search" name="search"
+            placeholder="Parking"> <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+      </form>
+    </div>
+
+
     <table class="table">
       <thead>
         <tr>
